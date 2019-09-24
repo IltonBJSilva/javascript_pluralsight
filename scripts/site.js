@@ -1,3 +1,7 @@
+/*
+Ele define uma classe de pedido de emprestimo que usamos
+ para armazenar pedidos de emprestismo.
+*/ 
 class LoanApplication {
     Id = create_UUID();
     ApplicantName;
@@ -8,6 +12,8 @@ class LoanApplication {
     LoanAmount;
 }
 
+
+// a classe toda e armazena dentro do array.
 var LoanApplicationList = [];
 
 //fires when the page loads
@@ -19,7 +25,10 @@ window.onload = function () {
 }
 
 function initializeLoans() {
-
+    
+    /*São todos dados ja pré salvo como e uma 
+    aplicação simples não ouve persistencia de dados 
+    em algum banco de dados*/
     var la1 = new LoanApplication();
     la1.ApplicantName = "Mr. John worker";
     la1.ApplicantDateOfBirth = new Date(1983, 2, 1);
@@ -49,6 +58,16 @@ function initializeLoans() {
     la3.LoanAmount = 6000;
 
     LoanApplicationList[2] = la3;
+
+    var la4 = new LoanApplication();
+    la4.ApplicantName = "Mr. Ilton Batista da Silva Júnior";
+    la4.ApplicantDateOfBirth = new Date(2001, 4, 14);
+    la4.ApplicantAnnualIncome = 21000;
+    la4.Factors = [true, true, true, true];
+    la4.LoanPurpose = "Boas ferias no havai";
+    la4.LoanAmount = 60000000;
+    //Fim dos dados ja salvos.
+    LoanApplicationList[3] = la4;
 }
 
 function create_UUID(){
@@ -62,16 +81,20 @@ function create_UUID(){
 }
 
 function bindLoansToDropDown() {
-
+    //Pega no html onde o id e "loanApplications" 
     var dropDown = document.getElementById("loanApplications");
 
     dropDown.options.length = 0;
-
+    //Cria elementos option no qual e jogado no html
     var el = document.createElement("option");
     el.textContent = "...Select an application...";
     dropDown.appendChild(el);
 
 
+    /*
+    Para percorrer o o aplicativos no caso vai iterando 
+    com os aplicativos criando novos itens para lista suspensa
+    */
     for (var i = 0; i < LoanApplicationList.length; i++) {
         var la = LoanApplicationList[i];
 
